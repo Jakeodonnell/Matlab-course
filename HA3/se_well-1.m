@@ -40,7 +40,7 @@ end;
 
 % Plot potential well --------------------------------------------
 figure(1);
-subplot(3,2,1);
+subplot(3,4,1);
 plot(x,U,'LineWidth',3);
 grid on
 axis([xMin-eps xMax min(U)-50 max(U)+50]);
@@ -109,7 +109,7 @@ disp(' ');
 xs(1) = -x1;
 xs(2) = x1;
 %figure(2);
-subplot(3,2,2);
+subplot(3,4,2);
 plot(x,U,'b','LineWidth',2);
 xlabel('position x (nm)','FontSize',12);
 ylabel('energy U, E_n (eV)','FontSize',12);
@@ -125,7 +125,7 @@ axis([xMin-eps xMax min(U)-50 max(U)+50]);
 % Plots the eigenfunctions (wavefunctions)
 for cn = 1:nbound
     %figure(cn+2)
-    subplot(3,2,cn+2);
+    subplot(3,4,cn+2);
     y1 = psi(:,cn)/(max(psi(:,cn)-min(psi(:,cn))));
     y2 = prob(:,cn)/max(prob(:,cn));
     y3 = 1 + 2*U/(max(U) - min(U));

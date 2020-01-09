@@ -1,3 +1,4 @@
+figure(1)
 clf
 E0 = 0.7;                   % Initial energy
 npart = 1000;                % Number of particles to be simulated
@@ -76,10 +77,12 @@ for a = 1:1:5
     axis([-0.6 0.6 0 1])
     Edep = Edep/npart                   % Compute average deposited energy
     arrWithEdep(r*10) = Edep;
+    title(Edep)
 end
 arrEdep = arrWithEdep
 averageOfAll = median(arrWithEdep)
 %% b
+figure(2)
 
 clf
 E0 = 0.7;                   % Initial energy
@@ -167,6 +170,8 @@ arrAbs = arrWithAbs
 averageOfAll = median(arrWithAbs)
 
 %% c
+figure(3)
+
 clf
 E0 = 0.7;                   % Initial energy
 npart = 1000;                % Number of particles to be simulated
@@ -212,15 +217,11 @@ for j=1:npart               % Loop over number of particles
             k = 1;                % End particle track
         else                     % If elastic scattering
             
-            choices = [-pi:0.01:pi];
-            % randomly pick one using *randi*
-            phi = choices(randi([1 length(choices)],1,1));
+            phi = -pi+2*pi*rand;
             % theta = -pi+2*pi*rand + thetaold;  % Determine deflection angle
-       
-            theta = -pi+2*pi*rand + thetaold;  % Determine deflection angle
-            E = 0.5*E;            % Update energy
-            dE = (E/2).*(1+cos(phi));
-            Edep = Edep - dE;      % Increment deposited energy
+            theta = phi + thetaold;  % Determine deflection angle
+            E = 0.5*E *(1-cos(phi));            % Update energy
+            Edep = Edep + E;      % Increment deposited energy
             d = E*rand;           % Range before interaction
             x = d*sin(theta);     % Change in x-position due to scattering
             y = d*cos(theta);     % Change in y-position due to scattering
@@ -247,8 +248,9 @@ axis([-0.6 0.6 0 1])
 Edep = Edep/npart                   % Compute average deposited energy
 
 %% d
+figure(4)
 
-    clf
+clf
 for z = 1:1:10
     E0 = 0.7;                   % Initial energy
     npart = 1000;                % Number of particles to be simulated
@@ -294,14 +296,11 @@ for z = 1:1:10
                 Edep = Edep + E;      % Increment deposited energy
                 k = 1;                % End particle track
             else                     % If elastic scattering
-                choices = [-pi:0.01:pi];
-                % randomly pick one using *randi*
-                phi = choices(randi([1 length(choices)],1,1));
                 
-                theta = -pi+2*pi*rand + thetaold;  % Determine deflection angle
-                E = 0.5*E;            % Update energy
-                dE = (E/2).*(1+cos(phi));
-                Edep = (Edep - dE);      % Increment deposited energy
+                phi = -pi+2*pi*rand;
+                theta = phi + thetaold;  % Determine deflection angle
+                E = 0.5*E*(1-cos(phi));            % Update energy
+                Edep = Edep + E;      % Increment deposited energy
                 d = E*rand;           % Range before interaction
                 x = d*sin(theta);     % Change in x-position due to scattering
                 y = d*cos(theta);     % Change in y-position due to scattering

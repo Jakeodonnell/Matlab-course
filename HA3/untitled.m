@@ -1,7 +1,9 @@
-function t = eigMass(masspoints,nodes)
+function [outputArg1,outputArg2] = untitled(masspoints,nodes)
 massPoints = masspoints;
 node = nodes;
 time = 3;
+outputArg1 = 1;
+outputArg2 = 1;
 twoVector = ones(1,massPoints)*-2;
 oneVector = ones(1,(massPoints-1))*1;
 
@@ -25,6 +27,7 @@ for t = 0:0.1:(time*2)*pi % Duration of how long animation should go on
     ylim([-1 1])
     pause (0.1)
 end
-t = 1;
+end
+
 end
 
